@@ -1,24 +1,31 @@
-#
-#
+NAME		= cub3D
+SRCDIR		= srcs/
+SRC			= parcer.c
 
-NOM=libmlx.a
-SRC= mlx_shaders.c mlx_new_window.m mlx_init_loop.m mlx_new_image.m mlx_xpm.c mlx_int_str_to_wordtab.c
-SRC+= mlx_png.c mlx_mouse.m
-OBJ1=$(SRC:.c=.o)
-OBJ=$(OBJ1:.m=.o)
-CFLAGS+=-O2
+SOURCES		= $(addprefix $(SRCDIR),$(SRC))
+OBJ			= $(SOURCES:.c=.o)
+CC			= gcc
+MLXFLAGS	= -l mlx -framework OpenGL -framework AppKit
+CFLAGS		= -I inc/ -Wall -Wextra -Werror
+LIBFT_FLAGS	= -L libft/ -lft
 
-# add to match string put with X11 in size and position
-CFLAGS+= -DSTRINGPUTX11
+.c.o:
+			$(CC) $(CFLAGS) -c $< -o $(<:.c=.o)
 
-all: $(NOM)
+$(NAME):	$(OBJ)
+			make bonus -C libft/
+			$(CC) -o $(NAME) $(MLXFLAGS) $(LIBFT_FLAGS) $(OBJ)
 
-$(NOM):	$(OBJ)
-	ar -r $(NOM) $(OBJ)
-	ranlib $(NOM)
+all:		$(NAME)
 
 clean:
-	rm -f $(NOM) $(OBJ) *~
-	rm -f mlx_app
+			rm -rf $(OBJ)
+			make clean -C libft/
 
-re: clean all
+fclean:		clean
+			rm -rf $(NAME)
+			make fclean -C libft/
+
+re:			fclean all
+
+.PHONY:		all clean fclean re
