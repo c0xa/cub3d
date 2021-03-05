@@ -6,7 +6,7 @@
 /*   By: tblink <tblink@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/20 21:11:36 by tblink            #+#    #+#             */
-/*   Updated: 2020/11/09 16:19:42 by tblink           ###   ########.fr       */
+/*   Updated: 2021/03/05 21:37:34 by tblink           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,5 +36,7 @@ int		ft_atoi(const char *string)
 			return (-1);
 		n = n * 10 + *(string++) - '0';
 	}
+	if (*string > 0)
+		return (-1);
 	return ((int)n * mark);
 }

@@ -1,23 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parcer.c                                           :+:      :+:    :+:   */
+/*   cub3d.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tblink <tblink@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/12 19:55:36 by tblink            #+#    #+#             */
-/*   Updated: 2021/02/12 20:18:58 by tblink           ###   ########.fr       */
+/*   Updated: 2021/03/05 20:05:48 by tblink           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../inc/cub3d.h"
+#include "cub3d.h"
 
-int check_params(char *name_map, char *save_flag, t_params *params)
-{ 
-
+int		check_params(char *name_map, char *save_flag, t_params *params)
+{
 	char	*end_line;
 	size_t	len;
-	
+
 	if (save_flag != NULL)
 	{
 		params->save_flag = 1;
@@ -37,8 +36,8 @@ int check_params(char *name_map, char *save_flag, t_params *params)
 	return (0);
 }
 
-int game_start(t_tab *tab, char *map)
-{		
+static	int	game_start(t_tab *tab, char *map)
+{
 	//int				ret;
 	t_button		button;
 	t_raycasting	rayc;
@@ -62,7 +61,6 @@ int	main(int argc, char **argv)
 
 	t = 0;
 	init_params(&params);
-	//errors_arr();
 	tab.params = &params;
 	if (argc == 3 && check_params(argv[1], argv[2], tab.params))
 		t = 1;
@@ -70,6 +68,8 @@ int	main(int argc, char **argv)
 		t = 1;
 	if (t)
 		game_start(&tab, argv[1]);
-	//print_error(1);
+	else
+		perror("Not valid parameter");
+	//perror("exit");
 	return (0);
 }

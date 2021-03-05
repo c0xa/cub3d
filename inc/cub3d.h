@@ -6,27 +6,27 @@
 /*   By: tblink <tblink@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/12 19:55:30 by tblink            #+#    #+#             */
-/*   Updated: 2021/02/12 19:56:30 by tblink           ###   ########.fr       */
+/*   Updated: 2021/03/05 22:11:45 by tblink           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef CUB3D_H
 # define CUB3D_H
-#define BUFFER_SIZE 7
-//# include "mlx.h"
-# include <unistd.h>
-# include <stdio.h>
-# include <fcntl.h>
-# include <stdlib.h>
-# include <sys/errno.h>
-# include "../libft/libft.h"
 
-typedef struct	s_sprite {
+# include "mlx.h"
+# include "stdio.h"
+# include "fcntl.h"
+# include <unistd.h>
+# include <stdlib.h>
+# include "../libft/libft.h"
+# define BUFFER_SIZE 7
+
+typedef struct	s_sprite { //структура для спрайта
 	int	x;
 	int	y;
 }				t_sprite;
 
-typedef struct	s_params { //структура для окна
+typedef struct	s_params { //структура для игры
 	int		save_flag;
 	int		width;
 	int		height;
@@ -41,7 +41,7 @@ typedef struct	s_params { //структура для окна
 	int		number_of_sprites;
 }				t_params;
 
-typedef struct	s_tex {
+typedef struct	s_tex { //структура для текстур
 	void		*img;
 	char		*addr;
 	int			bpp;
@@ -51,7 +51,7 @@ typedef struct	s_tex {
 	int			height;
 }				t_tex;
 
-typedef struct	s_raycasting {
+typedef struct	s_raycasting { //структура для рейкастингка
 	double		pos_x;
 	double		pos_y;
 	double		dir_x;
@@ -95,14 +95,13 @@ typedef struct	s_raycasting {
 	int			draw_end_x;
 }				t_raycasting;
 
-typedef struct	s_img {
+typedef struct	s_img { //структура для картинки --save
 	void		*img;
 	char		*addr;
 	int			bpp;
 	int			line_len;
 	int			endian;
 }				t_img;
-
 
 typedef struct	s_button { //структура для клавиш
 	int		w;
@@ -113,14 +112,13 @@ typedef struct	s_button { //структура для клавиш
 	int		right;
 }				t_button;
 
-
 typedef struct	s_point // структура для точки
 {
 	int			x;
 	int			y;
 }				  t_point;
 
-typedef struct	s_tab {
+typedef struct	s_tab { // структура для точки
 	void			*mlx_p;
 	void			*win_p;
 	t_params		*params;
@@ -137,14 +135,13 @@ typedef struct	s_tab {
 
 int		get_next_line(int fd, char **line);
 int		writefile(int fd, char **line, char **bufs);
-void	init_sprite (t_sprite *sprite);
-void	init_button(t_button *button);
-void	init_params(t_params *params);
-int		game_start(t_tab *tab, char *map);
-int		check_params(char *name_map, char *save_flag, t_params *params);
-int		parse_file(char *name_file, t_params *params);
-void	free_string_arr(char **string_arr);
-int		parse_map(int fd, char **line, t_params *params);
 int		main(int argc, char **argv);
-
+int		check_params(char *name_map, char *save_flag, t_params *params);
+int		parse_file(char *map, t_params *params);
+void	init_params(t_params *params);
+void	init_button(t_button *button);
+void	init_sprite (t_sprite *sprite);
+int		set_resolution(char **buf, t_params *params);
+int		set_texture(int flag, char **buf, t_params *params);
+int		set_color(int flag, char **buf, t_params *params);
 #endif

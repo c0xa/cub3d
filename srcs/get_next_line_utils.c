@@ -1,3 +1,14 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   get_next_line_utils.c                              :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: tblink <tblink@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/02/12 19:55:36 by tblink            #+#    #+#             */
+/*   Updated: 2021/03/05 17:59:34 by tblink           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "cub3d.h"
 
@@ -35,7 +46,7 @@ static int			freestr(char **dest, char *src)
 	return (1);
 }
 
-static char		*strjoin(char *s1, char *s2, int len2)
+static char		*fstrjoin(char *s1, char *s2, int len2)
 {
 	size_t		len1;
 	char		*buf;
@@ -73,7 +84,7 @@ static char		*stream(char **line, char *buf)
 	{
 		len++;
 	}
-	freestr(line, strjoin(*line, buf, len));
+	freestr(line, fstrjoin(*line, buf, len));
 	if (!(s = (char*)malloc((BUFFER_SIZE + 1) * sizeof(char))))
 		return (NULL);
 	if (buf[len] == '\n' && buf[len])
@@ -106,8 +117,8 @@ int			writefile(int fd, char **line, char **bufs)
 		if ((ft_strchr_strlen(*bufs, 1)) && freestr(bufs, stream(line, *bufs)))
 			return (1);
 		else
-			freestr(line, strjoin(*line, *bufs, k));
+			freestr(line, fstrjoin(*line, *bufs, k));
 	}
-	freestr(line, strjoin(*line, *bufs, k));
+	freestr(line, fstrjoin(*line, *bufs, k));
 	return (0);
 }
