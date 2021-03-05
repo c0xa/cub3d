@@ -16,9 +16,7 @@ char	*ft_calloc(size_t count, size_t size)
 {
 	void			*buf;
 	unsigned char	*p;
-	size_t			i;
 
-	i = 0;
 	size = size * count;
 	buf = malloc(size);
 	if (!buf)

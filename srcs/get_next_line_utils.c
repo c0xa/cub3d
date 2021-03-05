@@ -1,7 +1,7 @@
 
-#include "get_next_line.h"
+#include "cub3d.h"
 
-int			ft_strchr_strlen(char *str, int flag)
+static int			ft_strchr_strlen(char *str, int flag)
 {
 	int n;
 
@@ -25,7 +25,7 @@ int			ft_strchr_strlen(char *str, int flag)
 	return (n);
 }
 
-int			freestr(char **dest, char *src)
+static int			freestr(char **dest, char *src)
 {
 	char	*tmp;
 
@@ -35,7 +35,7 @@ int			freestr(char **dest, char *src)
 	return (1);
 }
 
-char		*ft_strjoin(char *s1, char *s2, int len2)
+static char		*strjoin(char *s1, char *s2, int len2)
 {
 	size_t		len1;
 	char		*buf;
@@ -61,7 +61,7 @@ char		*ft_strjoin(char *s1, char *s2, int len2)
 	return (buf);
 }
 
-char		*stream(char **line, char *buf)
+static char		*stream(char **line, char *buf)
 {
 	char		*s;
 	int			len;
@@ -73,7 +73,7 @@ char		*stream(char **line, char *buf)
 	{
 		len++;
 	}
-	freestr(line, ft_strjoin(*line, buf, len));
+	freestr(line, strjoin(*line, buf, len));
 	if (!(s = (char*)malloc((BUFFER_SIZE + 1) * sizeof(char))))
 		return (NULL);
 	if (buf[len] == '\n' && buf[len])
@@ -106,8 +106,8 @@ int			writefile(int fd, char **line, char **bufs)
 		if ((ft_strchr_strlen(*bufs, 1)) && freestr(bufs, stream(line, *bufs)))
 			return (1);
 		else
-			freestr(line, ft_strjoin(*line, *bufs, k));
+			freestr(line, strjoin(*line, *bufs, k));
 	}
-	freestr(line, ft_strjoin(*line, *bufs, k));
+	freestr(line, strjoin(*line, *bufs, k));
 	return (0);
 }

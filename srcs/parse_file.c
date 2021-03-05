@@ -10,12 +10,21 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "../inc/cub3d.h"
 
-int	main()
+int			parse_file(char *name_file, t_params *params)
 {
-	void    *m = mlx_init();
-	mlx_new_window(m, 1000, 2000, "t");
-	mlx_loop(m);
-	return (0);
+	int fd;
+	int ret;
+
+	if ((fd = open(name_file, O_RDONLY)) == -1)
+		return (-1);
+	ret = parse_line(fd, params);
+	while (ret == 1)
+		ret = parse_line(fd, params);
+	if ((close(fd)) == -1)
+		return (-1);
+	if (ret == 0 && !(params->map))
+		return (19);
+	return (ret);
 }
