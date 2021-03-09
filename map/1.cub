@@ -1,7 +1,12 @@
 R 1920 1080
+          NO textures/WALL16.xpm
+		  SO textures/WALL16.xpm
+		  EA textures/WALL16.xpm
+		  WE textures/WALL16.xpm
 
-F 220,100,0
-C 225,30,0
+S textures/sprite
+F 77,77,77
+C 255,204,255
 
 1111111111111111111111111
 1000000000110000000000001

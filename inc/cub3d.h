@@ -13,7 +13,7 @@
 #ifndef CUB3D_H
 # define CUB3D_H
 
-# include "mlx.h"
+//# include "mlx.h"
 # include "stdio.h"
 # include "fcntl.h"
 # include <unistd.h>
@@ -141,7 +141,12 @@ int		parse_file(char *map, t_params *params);
 void	init_params(t_params *params);
 void	init_button(t_button *button);
 void	init_sprite (t_sprite *sprite);
+int		parse_parameter(int fd, t_params *params, int flag);
 int		set_resolution(char **buf, t_params *params);
 int		set_texture(int flag, char **buf, t_params *params);
 int		set_color(int flag, char **buf, t_params *params);
+int			other_params_set(t_params *params);
+int			convert_map(int fd, char **line, t_params *params);
+int			count_sprites(char **map);
+
 #endif

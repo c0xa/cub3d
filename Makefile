@@ -5,11 +5,13 @@ SRC			= cub3d.c \
 			get_next_line.c \
 			initial.c \
 			parser_map.c \
-			set_params.c
+			set_parameter.c \
+			convert_map.c 
+
 SOURCES		= $(addprefix $(SRCDIR),$(SRC))
 OBJ			= $(SOURCES:.c=.o)
 CC			= gcc
-MLXFLAGS	= -lmlx -framework OpenGL -framework AppKit
+#MLXFLAGS	= -lmlx -framework OpenGL -framework AppKit
 CFLAGS		= -Iinc/ -Wall -Wextra -Werror
 LIBFT_FLAGS	= -L libft/ -lft
 
@@ -18,7 +20,9 @@ LIBFT_FLAGS	= -L libft/ -lft
 
 $(NAME):	$(OBJ)
 			make bonus -C libft/
-			$(CC) -o $(NAME) $(MLXFLAGS) $(LIBFT_FLAGS) $(OBJ)
+			cp libft/libft.a $(NAME)
+			ar rc $(NAME) $(OBJ)
+			#$(CC) -o $(NAME) $(LIBFT_FLAGS) $(OBJ)
 
 all:		$(NAME)
 
