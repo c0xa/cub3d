@@ -6,14 +6,14 @@
 /*   By: tblink <tblink@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/12 19:55:30 by tblink            #+#    #+#             */
-/*   Updated: 2021/03/05 22:11:45 by tblink           ###   ########.fr       */
+/*   Updated: 2021/03/11 21:36:09 by tblink           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef CUB3D_H
 # define CUB3D_H
 
-//# include "mlx.h"
+# include "mlx.h"
 # include "stdio.h"
 # include "fcntl.h"
 # include <unistd.h>
@@ -26,7 +26,7 @@ typedef struct	s_sprite { //структура для спрайта
 	int	y;
 }				t_sprite;
 
-typedef struct	s_params { //структура для игры
+typedef struct	s_params { //структура для карты
 	int		save_flag;
 	int		width;
 	int		height;
@@ -141,12 +141,12 @@ int		parse_file(char *map, t_params *params);
 void	init_params(t_params *params);
 void	init_button(t_button *button);
 void	init_sprite (t_sprite *sprite);
-int		parse_parameter(int fd, t_params *params, int flag);
+int		parse_parameter(int fd, t_params *params, int flag, int i);
 int		set_resolution(char **buf, t_params *params);
 int		set_texture(int flag, char **buf, t_params *params);
 int		set_color(int flag, char **buf, t_params *params);
-int			other_params_set(t_params *params);
-int			convert_map(int fd, char **line, t_params *params);
-int			count_sprites(char **map);
+int		convert_map(int fd, char **line, t_params *params);
+int 	check_error_map(t_params *params, int count_position, int i, int j);
+void draw_ceil_floor(t_tab *tab);
 
 #endif

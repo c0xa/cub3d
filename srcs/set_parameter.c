@@ -6,17 +6,11 @@
 /*   By: tblink <tblink@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/12 19:55:36 by tblink            #+#    #+#             */
-/*   Updated: 2021/03/05 22:11:46 by tblink           ###   ########.fr       */
+/*   Updated: 2021/03/11 21:44:28 by tblink           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
-
-
-static int		rgb_to_int(int r, int g, int b)
-{
-	return (r << 16 | g << 8 | b);
-}
 
 int set_resolution(char **buf, t_params *params)
 {
@@ -26,13 +20,13 @@ int set_resolution(char **buf, t_params *params)
 		return (-1);
 	if (params->width != -1 && params->height != -1)
 		return (-1);
-	height = ft_atoi(buf[1]);
-	width = ft_atoi(buf[2]);
+	width = ft_atoi(buf[1]);
+	height = ft_atoi(buf[2]);
 	if (height <= 0 || width <= 0)
 		return (-1);
-	if (height > 2560)
-		height = 2560;
-	if (width > 1440)
+	if (width > 2560)
+		width = 2560;
+	if (height > 1440)
 		height = 1440;
 	params->height = height;
 	params->width = width;
@@ -66,6 +60,14 @@ int set_texture(int flag, char **buf, t_params *params)
 	return (0);
 }
 
+static int		convert_rgb_to_int(int r, int g, int b)
+{
+	int t;
+
+	t = r << 16 | g << 8 | b;
+	return (t);
+}
+
 int set_color(int flag, char **buf, t_params *params)
 {
 	char **rgb;
@@ -82,9 +84,9 @@ int set_color(int flag, char **buf, t_params *params)
 		|| ft_atoi(rgb[0]) < 0 || ft_atoi(rgb[1]) < 0 || ft_atoi(rgb[2]) < 0)
 		return (-1);
 	if (flag == 1)
-		 params->floor = rgb_to_int(ft_atoi(rgb[0]), ft_atoi(rgb[1]), ft_atoi(rgb[2]));
-	else if (flag == 1)
-		 params->ceiling = rgb_to_int(ft_atoi(rgb[0]), ft_atoi(rgb[1]), ft_atoi(rgb[2]));
+		 params->floor = convert_rgb_to_int(ft_atoi(rgb[0]), ft_atoi(rgb[1]), ft_atoi(rgb[2]));
+	else
+		 params->ceiling = convert_rgb_to_int(ft_atoi(rgb[0]), ft_atoi(rgb[1]), ft_atoi(rgb[2]));
 	free(rgb[0]);
 	free(rgb[1]);
 	free(rgb[2]);

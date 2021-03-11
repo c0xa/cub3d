@@ -6,7 +6,7 @@
 /*   By: tblink <tblink@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/12 19:55:36 by tblink            #+#    #+#             */
-/*   Updated: 2021/03/05 20:05:48 by tblink           ###   ########.fr       */
+/*   Updated: 2021/03/11 21:36:28 by tblink           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,20 +36,38 @@ int		check_params(char *name_map, char *save_flag, t_params *params)
 	return (0);
 }
 
+static void check(t_params *params)
+{
+	printf("width %d\n", params->width);
+	printf("height %d\n", params->height);
+	printf("floor %d\n", params->floor);
+	printf("ceiling %d\n", params->ceiling);
+	printf("number_of_sprites %d\n", params->number_of_sprites);
+	printf("north %s\n", params->north);
+	printf("south %s\n", params->south);
+	printf("west %s\n", params->west);
+	printf("east %s\n", params->east);
+}
+
 static	int	game_start(t_tab *tab, char *map)
 {
 	//int				ret;
 	t_button		button;
 	t_raycasting	rayc;
 	t_img			frame_buf;
+	int i;
 
-	if (parse_file(map, tab->params) != 0)
+	i = parse_file(map, tab->params);
+	printf("i = %d\n", i);
+	if (i != 1)
 		return (0);
+	check(tab->params);
 	tab->rayc = &rayc;
 	//init_keys(&button);
 	tab->button = &button;
 	tab->frame_buf = &frame_buf;
 	//init_mlx(tab);
+	draw_ceil_floor(tab);
 	return (0);
 }
 
@@ -69,7 +87,7 @@ int	main(int argc, char **argv)
 	if (t)
 		game_start(&tab, argv[1]);
 	else
-		perror("Not valid parameter");
+		perror("Error\nNot valid parameter");
 	//perror("exit");
 	return (0);
 }
