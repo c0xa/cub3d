@@ -6,7 +6,7 @@
 /*   By: tblink <tblink@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/12 19:55:36 by tblink            #+#    #+#             */
-/*   Updated: 2021/03/11 21:36:28 by tblink           ###   ########.fr       */
+/*   Updated: 2021/03/14 20:35:49 by tblink           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,28 @@ int		check_params(char *name_map, char *save_flag, t_params *params)
 	return (0);
 }
 
+void	free_object(t_params *params)
+{
+	int i;
+
+	i = 0;
+	if (params->east)
+		free(params->east);
+	if (params->south)
+		free(params->south);
+	if (params->west)
+		free(params->west);
+	if (params->east)
+		free(params->east);
+	if (params->sprite)
+		free(params->sprite);
+	if (params->map == NULL)
+		return;
+	while (params->map[i])
+		free(params->map[i++]);
+	free(params->map);
+}
+
 static void check(t_params *params)
 {
 	printf("width %d\n", params->width);
@@ -51,7 +73,6 @@ static void check(t_params *params)
 
 static	int	game_start(t_tab *tab, char *map)
 {
-	//int				ret;
 	t_button		button;
 	t_raycasting	rayc;
 	t_img			frame_buf;
@@ -60,14 +81,20 @@ static	int	game_start(t_tab *tab, char *map)
 	i = parse_file(map, tab->params);
 	printf("i = %d\n", i);
 	if (i != 1)
+	{
+		check(tab->params);
+		printf("finish\n");
+		free_object(tab->params);
+		//init_params(tab->params);
+		//check(tab->params);
 		return (0);
+	}
 	check(tab->params);
 	tab->rayc = &rayc;
-	//init_keys(&button);
+	init_button(&button);
 	tab->button = &button;
 	tab->frame_buf = &frame_buf;
-	//init_mlx(tab);
-	draw_ceil_floor(tab);
+	draw_and_inital(tab);
 	return (0);
 }
 
@@ -75,11 +102,16 @@ int	main(int argc, char **argv)
 {
 	t_tab		tab;
 	t_params	params;
+	t_point		point;
+	t_img		frame_buf;
 	int			t;
 
 	t = 0;
 	init_params(&params);
+	init_point(&point);
 	tab.params = &params;
+	tab.point = &point;
+	tab.frame_buf = &frame_buf;
 	if (argc == 3 && check_params(argv[1], argv[2], tab.params))
 		t = 1;
 	else if (argc == 2 && check_params(argv[1], 0, tab.params))

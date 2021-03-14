@@ -6,7 +6,7 @@
 /*   By: tblink <tblink@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/12 19:55:36 by tblink            #+#    #+#             */
-/*   Updated: 2021/03/05 18:02:41 by tblink           ###   ########.fr       */
+/*   Updated: 2021/03/14 20:20:24 by tblink           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,12 @@ void init_sprite (t_sprite *sprite)
 {
     sprite->x = 0;
     sprite->y = 0;
+}
+
+void init_point (t_point *point)
+{
+    point->x = 0;
+    point->y = 0;
 }
 
 void	init_button(t_button *button)

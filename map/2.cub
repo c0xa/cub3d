@@ -9,8 +9,8 @@ WE textures/WALL69.xpm
 EA textures/WALL69.xpm
 
 S textures/barrel.xpm
-F 77,77,77
-C 255,204,255
+F 213,255,128
+C 96,32,32
 
          111111111
          100200001     

@@ -6,7 +6,7 @@
 /*   By: tblink <tblink@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/12 19:55:36 by tblink            #+#    #+#             */
-/*   Updated: 2021/03/11 21:14:25 by tblink           ###   ########.fr       */
+/*   Updated: 2021/03/12 18:20:16 by tblink           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,6 @@ int check_error_map(t_params *params, int count_position, int i, int j)
 				return (-1);
 			j++;
 		}
-		printf("%s\n", params->map[i]);
 		i++;
 		j = 0;
 	}

@@ -6,7 +6,7 @@
 /*   By: tblink <tblink@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/12 19:55:30 by tblink            #+#    #+#             */
-/*   Updated: 2021/03/11 21:36:09 by tblink           ###   ########.fr       */
+/*   Updated: 2021/03/14 20:22:06 by tblink           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,6 +121,7 @@ typedef struct	s_point // структура для точки
 typedef struct	s_tab { // структура для точки
 	void			*mlx_p;
 	void			*win_p;
+	t_point			*point;  //temporary
 	t_params		*params;
 	t_button		*button;
 	t_raycasting	*rayc;
@@ -147,6 +148,10 @@ int		set_texture(int flag, char **buf, t_params *params);
 int		set_color(int flag, char **buf, t_params *params);
 int		convert_map(int fd, char **line, t_params *params);
 int 	check_error_map(t_params *params, int count_position, int i, int j);
-void draw_ceil_floor(t_tab *tab);
+void 	draw_and_inital(t_tab *tab);
+int 	check_button_release(int but, t_tab *tab);
+int 	check_button_press(int but, t_tab *tab);
+int exit_game(void *arg);
+void init_point (t_point *point);
 
 #endif
