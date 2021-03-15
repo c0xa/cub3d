@@ -6,7 +6,7 @@
 /*   By: tblink <tblink@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/12 19:55:36 by tblink            #+#    #+#             */
-/*   Updated: 2021/03/14 20:38:22 by tblink           ###   ########.fr       */
+/*   Updated: 2021/03/15 21:17:19 by tblink           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,10 +62,6 @@ int draw_ceil_floor(t_tab* tab)
 
 	i = 0;
 	j = 0;
-	printf("w %d\n", tab->button->w);
-	printf("a %d\n", tab->button->a);
-	printf("s %d\n", tab->button->s);
-	printf("d %d\n", tab->button->d);
 	while (i < tab->params->height/2)
 	{
 		while (j < tab->params->width)
@@ -112,7 +108,7 @@ int draw(t_tab *tab)
 		}
 	}
 	mlx_clear_window(tab->mlx_p, tab->win_p);
-	mlx_put_image_to_window(tab->mlx_p, tab->win_p, tab->frame_buf, 0, 0);
+	mlx_put_image_to_window(tab->mlx_p, tab->win_p, tab->frame_buf->img, 0, 0);
 	return (0);
 }
 
@@ -125,7 +121,6 @@ void where_is_playes(t_tab *tab, int i, int j)
 	{
 		while (params->map[i][j])
 		{
-			printf("i: %d, j: %d\n", i, j);
 			if (params->map[i][j] == 'S' || params->map[i][j] == 'N'
 			|| params->map[i][j] == 'E' || params->map[i][j] == 'W')
 			{
