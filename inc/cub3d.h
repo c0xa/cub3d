@@ -6,7 +6,7 @@
 /*   By: tblink <tblink@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/12 19:55:30 by tblink            #+#    #+#             */
-/*   Updated: 2021/03/14 20:22:06 by tblink           ###   ########.fr       */
+/*   Updated: 2021/03/18 23:46:41 by tblink           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 # include "mlx.h"
 # include "stdio.h"
 # include "fcntl.h"
+# include "math.h"
 # include <unistd.h>
 # include <stdlib.h>
 # include "../libft/libft.h"
@@ -121,7 +122,6 @@ typedef struct	s_point // структура для точки
 typedef struct	s_tab { // структура для точки
 	void			*mlx_p;
 	void			*win_p;
-	t_point			*point;  //temporary
 	t_params		*params;
 	t_button		*button;
 	t_raycasting	*rayc;
@@ -151,7 +151,11 @@ int 	check_error_map(t_params *params, int count_position, int i, int j);
 void 	draw_and_inital(t_tab *tab);
 int 	check_button_release(int but, t_tab *tab);
 int 	check_button_press(int but, t_tab *tab);
-int exit_game(void *arg);
-void init_point (t_point *point);
-
+int		exit_game(void *arg);
+void 	engine_main(t_raycasting *rayc, int x, int width);
+void 	where_is_playes(t_tab *tab, int i, int j);
+void 	add_texture(t_tab *tab);
+void	hit_to_wall(t_raycasting *rayc, char **map);
+void 	calculate_draw(t_raycasting *rayc, int height);
+void calculate_wall(t_raycasting *rayc, int height);
 #endif

@@ -6,7 +6,7 @@
 /*   By: tblink <tblink@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/12 19:55:36 by tblink            #+#    #+#             */
-/*   Updated: 2021/03/14 20:35:49 by tblink           ###   ########.fr       */
+/*   Updated: 2021/03/18 23:23:44 by tblink           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,7 @@ static	int	game_start(t_tab *tab, char *map)
 	printf("i = %d\n", i);
 	if (i != 1)
 	{
-		check(tab->params);
+		//check(tab->params);
 		printf("finish\n");
 		free_object(tab->params);
 		//init_params(tab->params);
@@ -102,15 +102,12 @@ int	main(int argc, char **argv)
 {
 	t_tab		tab;
 	t_params	params;
-	t_point		point;
 	t_img		frame_buf;
 	int			t;
 
 	t = 0;
 	init_params(&params);
-	init_point(&point);
 	tab.params = &params;
-	tab.point = &point;
 	tab.frame_buf = &frame_buf;
 	if (argc == 3 && check_params(argv[1], argv[2], tab.params))
 		t = 1;
@@ -120,6 +117,5 @@ int	main(int argc, char **argv)
 		game_start(&tab, argv[1]);
 	else
 		perror("Error\nNot valid parameter");
-	//perror("exit");
 	return (0);
 }
