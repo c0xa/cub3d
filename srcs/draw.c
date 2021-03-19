@@ -6,7 +6,7 @@
 /*   By: tblink <tblink@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/12 19:55:36 by tblink            #+#    #+#             */
-/*   Updated: 2021/03/18 23:46:32 by tblink           ###   ########.fr       */
+/*   Updated: 2021/03/19 23:41:42 by tblink           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,28 +55,44 @@ int draw_block(int x, int y, t_tab *tab, int color)
 	return (0);
 }
 
-int draw_ceil_floor(t_tab* tab)
+static void draw_wall(t_tab* tab, t_img *frame_buf, int x)
 {
-	int x;
+	int	color;
 	int y;
 
-	x = 0;
-	y = 0;
+	y = tab->rayc->draw_start;
+	while (y <= tab->rayc->draw_end)
+	{
+		printf("tex_y = %d\n", tab->rayc->tex_y );
+		tab->rayc->tex_y = (int)(tab->rayc->tex_pos) & (tab->rayc->tex->height - 1);
+		tab->rayc->tex_pos += tab->rayc->tex_step;
+		color = ((int*)tab->rayc->tex->addr)
+			[tab->rayc->tex_y * tab->rayc->tex->width + tab->rayc->tex_x];
+		if (tab->rayc->side == 1)
+			color /= 2;
+		my_mlx_pixel_put(frame_buf, x, y, color);
+		y++;
+	}
+}
+
+
+int draw_ceil_floor(t_tab* tab, int x, int y)
+{
+	change_position_and_camera(tab);
 	while (x < (tab->params->width))
 	{
 		engine_main(tab->rayc, x, tab->params->width);
 		hit_to_wall(tab->rayc, tab->params->map);
 		y = 0;
 		calculate_wall(tab->rayc, tab->params->height);
+		calculate_position_wall(tab->rayc, tab->params->height);
 		while (y < tab->rayc->draw_start)
 		{
 			my_mlx_pixel_put(tab->frame_buf, x, y, tab->params->ceiling);
 			y++;
 		}
-		printf("draw_start = %d\n", tab->rayc->draw_start);
-		printf("draw_end = %d\n\n", tab->rayc->draw_end);
-		while (y <= tab->rayc->draw_end)
-			my_mlx_pixel_put(tab->frame_buf, x, y++, convert_rgb_mlx(0, 0, 255));
+		draw_wall(tab, tab->frame_buf, x);
+		y = tab->rayc->draw_end + 1;
 		while (y < tab->params->height)
 		{
 			my_mlx_pixel_put(tab->frame_buf, x, y, tab->params->floor);
@@ -89,22 +105,14 @@ int draw_ceil_floor(t_tab* tab)
 
 int draw(t_tab *tab)
 {
-	if (tab->button->w == 1)
-		tab->rayc->pos_y -= 1;
-	if (tab->button->a == 1)
-		tab->rayc->pos_x -= 1;
-	if (tab->button->s == 1)
-		tab->rayc->pos_y += 1;
-	if (tab->button->d == 1)
-		tab->rayc->pos_x += 1;	
-	draw_ceil_floor(tab);
+	draw_ceil_floor(tab, 0, 0);
 	for (int i = 0; tab->params->map[i]; i++) {
 		for (int j = 0; tab->params->map[i][j]; j++) {
 			if (i == (int)tab->rayc->pos_y && j == (int)tab->rayc->pos_x) {
 				draw_block(j * CELL, i * CELL, tab, 0);
 			}
 			else if (tab->params->map[i][j] == '1') {
-				draw_block(j * CELL, i * CELL, tab, convert_rgb_mlx(0, 0, 255));
+				draw_block(j * CELL, i * CELL, tab, convert_rgb_mlx(147, 97, 133));
 			}
 		}
 	}
@@ -124,6 +132,7 @@ void draw_and_inital(t_tab *tab)
 			&(tab->frame_buf->bpp), &(tab->frame_buf->line_len),
 			&(tab->frame_buf->endian));
 	where_is_playes(tab, 0, 0);
+	add_texture(tab);
 	mlx_do_key_autorepeatoff(tab->mlx_p);
 	mlx_hook(tab->win_p, 17, 0, exit_game, tab);
 	mlx_hook(tab->win_p, 2, 0, check_button_press, tab);

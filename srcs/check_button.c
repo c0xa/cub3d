@@ -6,7 +6,7 @@
 /*   By: tblink <tblink@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/12 19:55:36 by tblink            #+#    #+#             */
-/*   Updated: 2021/03/14 18:51:11 by tblink           ###   ########.fr       */
+/*   Updated: 2021/03/19 22:42:41 by tblink           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,4 +49,20 @@ int check_button_release(int but, t_tab *tab)
 	else if (but == 124)
 		(tab->button)->right = 0;
 	return (0);
+}
+
+void change_position_and_camera(t_tab *tab)
+{
+	if (tab->button->w == 1)
+		motion_w_s(tab, 1);
+	if (tab->button->a == 1)
+		motion_a_d(tab, -1);
+	if (tab->button->s == 1)
+		motion_w_s(tab, -1);
+	if (tab->button->d == 1)
+		motion_a_d(tab, 1);
+	if (tab->button->left == 1)
+		motion_left(tab);
+	if (tab->button->right == 1)
+		motion_right(tab);
 }

@@ -6,7 +6,7 @@
 /*   By: tblink <tblink@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/12 19:55:30 by tblink            #+#    #+#             */
-/*   Updated: 2021/03/18 23:46:41 by tblink           ###   ########.fr       */
+/*   Updated: 2021/03/19 23:35:18 by tblink           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -147,6 +147,7 @@ int		set_resolution(char **buf, t_params *params);
 int		set_texture(int flag, char **buf, t_params *params);
 int		set_color(int flag, char **buf, t_params *params);
 int		convert_map(int fd, char **line, t_params *params);
+void 	calculate_position_wall(t_raycasting *rayc, int height);
 int 	check_error_map(t_params *params, int count_position, int i, int j);
 void 	draw_and_inital(t_tab *tab);
 int 	check_button_release(int but, t_tab *tab);
@@ -157,5 +158,11 @@ void 	where_is_playes(t_tab *tab, int i, int j);
 void 	add_texture(t_tab *tab);
 void	hit_to_wall(t_raycasting *rayc, char **map);
 void 	calculate_draw(t_raycasting *rayc, int height);
-void calculate_wall(t_raycasting *rayc, int height);
+void 	calculate_wall(t_raycasting *rayc, int height);
+void	change_position_and_camera(t_tab *tab);
+void 	motion_right(t_tab *tab);
+void 	motion_left(t_tab *tab);
+void 	motion_w_s(t_tab *tab, int direction);
+void 	motion_a_d(t_tab *tab, int direction);
+int 	draw(t_tab *tab);
 #endif
