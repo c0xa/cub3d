@@ -6,7 +6,7 @@
 /*   By: tblink <tblink@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/12 19:55:36 by tblink            #+#    #+#             */
-/*   Updated: 2021/03/18 23:23:44 by tblink           ###   ########.fr       */
+/*   Updated: 2021/03/20 20:38:33 by tblink           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,17 +58,38 @@ void	free_object(t_params *params)
 	free(params->map);
 }
 
-static void check(t_params *params)
+// static void check(t_params *params)
+// {
+// 	printf("width %d\n", params->width);
+// 	printf("height %d\n", params->height);
+// 	printf("floor %d\n", params->floor);
+// 	printf("ceiling %d\n", params->ceiling);
+// 	printf("number_of_sprites %d\n", params->number_of_sprites);
+// 	printf("north %s\n", params->north);
+// 	printf("south %s\n", params->south);
+// 	printf("west %s\n", params->west);
+// 	printf("east %s\n", params->east);
+// }
+
+static void	calculate_map_width_height(t_params *params)
 {
-	printf("width %d\n", params->width);
-	printf("height %d\n", params->height);
-	printf("floor %d\n", params->floor);
-	printf("ceiling %d\n", params->ceiling);
-	printf("number_of_sprites %d\n", params->number_of_sprites);
-	printf("north %s\n", params->north);
-	printf("south %s\n", params->south);
-	printf("west %s\n", params->west);
-	printf("east %s\n", params->east);
+	int x;
+	int y;
+	int y_max;
+
+	x = 0;
+	y = 0;
+	y_max = 0;
+	while (params->map[x])
+	{
+		while (params->map[x][y])
+			y++;
+		if (y_max < y)
+			y_max = y;
+		x++;
+	}
+	params->height_map = x + 1;
+	params->width_map = y_max;
 }
 
 static	int	game_start(t_tab *tab, char *map)
@@ -79,21 +100,21 @@ static	int	game_start(t_tab *tab, char *map)
 	int i;
 
 	i = parse_file(map, tab->params);
-	printf("i = %d\n", i);
 	if (i != 1)
 	{
 		//check(tab->params);
 		printf("finish\n");
-		free_object(tab->params);
+		//free_object(tab->params);
 		//init_params(tab->params);
 		//check(tab->params);
 		return (0);
 	}
-	check(tab->params);
+	//check(tab->params);
 	tab->rayc = &rayc;
 	init_button(&button);
 	tab->button = &button;
 	tab->frame_buf = &frame_buf;
+	calculate_map_width_height(tab->params);
 	draw_and_inital(tab);
 	return (0);
 }

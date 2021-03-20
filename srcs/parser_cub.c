@@ -6,7 +6,7 @@
 /*   By: tblink <tblink@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/12 19:55:36 by tblink            #+#    #+#             */
-/*   Updated: 2021/03/11 17:57:41 by tblink           ###   ########.fr       */
+/*   Updated: 2021/03/20 21:07:26 by tblink           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,15 +61,15 @@ int		parse_parameter(int fd, t_params *params, int flag, int i)
 	if (ft_strlen(line) == 0)
 		return (0);
 	line = del_tab_and_sep(&line);
-	if (!(buf = ft_split(line, ' ')))
-	{
-		free(line);
-		return (-1);
-	}
-	if (buf[0] && ((buf[0][0] >= '0' && buf[0][0] <= '9') || buf[0][0] == ' '))
+	if ((line[0] >= '0' && line[0] <= '9') || line[0] == ' ')
 		return (convert_map(fd, &line, params));
 	else
 	{
+		if (!(buf = ft_split(line, ' ')))
+		{
+			free(line);
+			return (-1);
+		}
 		flag = check_map(buf, params);
 		free(line);
 	}

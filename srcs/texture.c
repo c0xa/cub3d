@@ -6,7 +6,7 @@
 /*   By: tblink <tblink@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/12 19:55:36 by tblink            #+#    #+#             */
-/*   Updated: 2021/03/18 23:18:32 by tblink           ###   ########.fr       */
+/*   Updated: 2021/03/20 21:18:39 by tblink           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ static void	add_address(t_tab *tab)
 	tab->e_tex->addr = mlx_get_data_addr(tab->e_tex->img, &(tab->e_tex->bpp),
 			&(tab->e_tex->line_len), &(tab->e_tex->endian));
 	tab->sprite->addr = mlx_get_data_addr(tab->sprite->img, &(tab->sprite->bpp),
-			&(tab->sprite->line_len), &(tab->sprite->endian));
+	 		&(tab->sprite->line_len), &(tab->sprite->endian));
 	tab->n_tex->addr = mlx_get_data_addr(tab->n_tex->img, &(tab->n_tex->bpp),
 			&(tab->n_tex->line_len), &(tab->n_tex->endian));
 	tab->w_tex->addr = mlx_get_data_addr(tab->w_tex->img, &(tab->w_tex->bpp),
@@ -40,6 +40,7 @@ static void add_texture_1(t_tab *tab)
 		perror("Error\nNot valid texture west");
 		exit_game(tab);
 	}
+	
 	if (!(tab->s_tex->img = mlx_xpm_file_to_image(tab->mlx_p, tab->params->south,
 					&(tab->s_tex->width), &(tab->s_tex->height))))
 	{
@@ -69,4 +70,5 @@ void add_texture(t_tab *tab)
 	add_texture_1(tab);
 	add_texture_2(tab);
 	add_address(tab);
+	printf("add\n");
 }

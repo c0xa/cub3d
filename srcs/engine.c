@@ -6,7 +6,7 @@
 /*   By: tblink <tblink@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/12 19:55:36 by tblink            #+#    #+#             */
-/*   Updated: 2021/03/19 23:34:21 by tblink           ###   ########.fr       */
+/*   Updated: 2021/03/20 19:09:28 by tblink           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,8 +76,23 @@ void calculate_wall(t_raycasting *rayc, int height)
 		rayc->draw_end = 0;
 }
 
-void calculate_position_wall(t_raycasting *rayc, int height)
+void calculate_position_wall(t_tab *tab, t_raycasting *rayc, int height)
 {
+	if (rayc->side == 1)
+	{
+		if (rayc->step_y > 0)
+			rayc->tex = tab->n_tex;
+		else
+			rayc->tex = tab->s_tex;
+	}
+	if (rayc->side == 0)
+	{
+		if (tab->rayc->step_x > 0)
+			rayc->tex = tab->w_tex;
+		else
+			rayc->tex = tab->e_tex;
+	}
+	
 	rayc->wall_x = 1 - (rayc->wall_x - floor(rayc->wall_x));
 	if (rayc->side == 0)
 		rayc->wall_x = rayc->pos_y + rayc->perp_wall_dist * rayc->ray_dir_y;

@@ -6,7 +6,7 @@
 /*   By: tblink <tblink@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/12 19:55:30 by tblink            #+#    #+#             */
-/*   Updated: 2021/03/19 23:35:18 by tblink           ###   ########.fr       */
+/*   Updated: 2021/03/20 20:31:42 by tblink           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,8 @@ typedef struct	s_params { //структура для карты
 	int		floor;
 	int		ceiling;
 	char	**map;
+	int		height_map;
+	int		width_map;
 	int		number_of_sprites;
 }				t_params;
 
@@ -119,9 +121,10 @@ typedef struct	s_point // структура для точки
 	int			y;
 }				  t_point;
 
-typedef struct	s_tab { // структура для точки
+typedef struct	s_tab { // структура для всего
 	void			*mlx_p;
 	void			*win_p;
+	int				map_size;
 	t_params		*params;
 	t_button		*button;
 	t_raycasting	*rayc;
@@ -142,12 +145,13 @@ int		parse_file(char *map, t_params *params);
 void	init_params(t_params *params);
 void	init_button(t_button *button);
 void	init_sprite (t_sprite *sprite);
+void	init_textures(t_tab *tab);
 int		parse_parameter(int fd, t_params *params, int flag, int i);
 int		set_resolution(char **buf, t_params *params);
 int		set_texture(int flag, char **buf, t_params *params);
 int		set_color(int flag, char **buf, t_params *params);
 int		convert_map(int fd, char **line, t_params *params);
-void 	calculate_position_wall(t_raycasting *rayc, int height);
+void calculate_position_wall(t_tab *tab, t_raycasting *rayc, int height);
 int 	check_error_map(t_params *params, int count_position, int i, int j);
 void 	draw_and_inital(t_tab *tab);
 int 	check_button_release(int but, t_tab *tab);

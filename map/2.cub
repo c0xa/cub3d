@@ -1,12 +1,10 @@
 R 1920 1080
-SO textures/WALL69.xpm
-NO textures/WALL69.xpm
+  NO textures/WALL16.xpm
+          SO textures/WALL75.xpm
+          EA textures/WALL85.xpm
 
 
-
-
-WE textures/WALL69.xpm
-EA textures/WALL69.xpm
+         WE textures/WALL16.xpm
 
 S textures/barrel.xpm
 F 213,255,128

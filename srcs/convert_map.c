@@ -6,7 +6,7 @@
 /*   By: tblink <tblink@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/12 19:55:36 by tblink            #+#    #+#             */
-/*   Updated: 2021/03/11 21:11:38 by tblink           ###   ########.fr       */
+/*   Updated: 2021/03/20 21:01:36 by tblink           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,16 +32,18 @@ static int	convert_map_to_arr(int fd, char **line, t_params *params)
 	int		y;
 	int		ret;
 	char	**temp;
+	int		i;
 
 	y = 1;
+	i = 0;
 	ret = get_next_line(fd, line);
 	while (ret == 1 || (ret == 0 && **line))
 	{
 		temp = params->map;
 		if (!(params->map = (char**)malloc(sizeof(char*) * (y + 2))))
 		{
-            while (*temp)
-                free(*temp++);
+            while (temp[i])
+                free(temp[i++]);
             free(temp);
 			return (-1);
 		}

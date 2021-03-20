@@ -6,7 +6,7 @@
 /*   By: tblink <tblink@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/12 19:55:36 by tblink            #+#    #+#             */
-/*   Updated: 2021/03/18 21:45:55 by tblink           ###   ########.fr       */
+/*   Updated: 2021/03/20 20:32:01 by tblink           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,8 @@ void init_params(t_params *params)
 	params->ceiling = -1;
 	params->map = 0;
 	params->number_of_sprites = 0;
+	params->height_map = 0;
+	params->width_map = 0;
 }
 
 void init_sprite (t_sprite *sprite)
