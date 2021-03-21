@@ -6,7 +6,7 @@
 /*   By: tblink <tblink@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/12 19:55:36 by tblink            #+#    #+#             */
-/*   Updated: 2021/03/20 21:07:26 by tblink           ###   ########.fr       */
+/*   Updated: 2021/03/21 19:23:57 by tblink           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,13 +33,11 @@ int check_map(char **buf, t_params *params)
 	return (2);
 }
 
-static char *del_tab_and_sep(char **buf)
+static char *del_tab_and_sep(char *line)
 {	
 	int i;
 	char *v;
-	char *line;
 
-	line  = *buf;
 	i = 0;
 	while (line[i] == ' ' || line[i]  == '\t' || line[i]  == '\n')
 		i++;
@@ -47,7 +45,7 @@ static char *del_tab_and_sep(char **buf)
 		v = ft_strdup(line);
 	else
 		v = ft_strdup(&line[i]);
-	free(*buf);
+	free(line);
 	return (v);
 }
 
@@ -58,9 +56,11 @@ int		parse_parameter(int fd, t_params *params, int flag, int i)
 
 	if ((get_next_line(fd, &line)) <= 0)
 		return (-1);
-	if (ft_strlen(line) == 0)
+	if (ft_strlen(line) == 0) {
+		free(line);
 		return (0);
-	line = del_tab_and_sep(&line);
+	}
+	line = del_tab_and_sep(line);
 	if ((line[0] >= '0' && line[0] <= '9') || line[0] == ' ')
 		return (convert_map(fd, &line, params));
 	else
@@ -71,11 +71,11 @@ int		parse_parameter(int fd, t_params *params, int flag, int i)
 			return (-1);
 		}
 		flag = check_map(buf, params);
-		free(line);
+		while (buf[i])
+			free(buf[i++]);
+		free(buf);
 	}
-	while (buf[i])
-		free(buf[i++]);
-	free(buf);
+	free(line);
 	return (flag);
 }
 

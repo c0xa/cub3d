@@ -4,7 +4,7 @@ R 10000 10000
 		EA textures/WALL16.xpm
 		WE textures/WALL16.xpm
 
-S textures/sprite
+S textures/grass.xpm
 F 133,173,173
 C 230,179,204
 

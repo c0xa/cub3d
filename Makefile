@@ -13,7 +13,8 @@ SRC			= cub3d.c \
 			engine.c \
 			init_position.c \
 			texture.c \
-			motion.c
+			motion.c \
+			sort_spites.c
 
 SOURCES		= $(addprefix $(SRCDIR),$(SRC))
 OBJ			= $(SOURCES:.c=.o)

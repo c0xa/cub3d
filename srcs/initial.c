@@ -6,7 +6,7 @@
 /*   By: tblink <tblink@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/12 19:55:36 by tblink            #+#    #+#             */
-/*   Updated: 2021/03/20 20:32:01 by tblink           ###   ########.fr       */
+/*   Updated: 2021/03/21 20:27:55 by tblink           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,10 +30,41 @@ void init_params(t_params *params)
 	params->width_map = 0;
 }
 
-void init_sprite (t_sprite *sprite)
+
+void init_sprite (t_tab *tab)
 {
-    sprite->x = 0;
-    sprite->y = 0;
+	int i;
+	int j;
+	int k;
+
+	i = 0;
+	j = 0;
+	k = 0;
+    while (tab->params->map[i])
+	{
+		j = 0;
+		while (tab->params->map[i][j])
+		{
+			if (tab->params->map[i][j] == '2')
+			{
+				(tab->sprite_arr[k]).x = i;
+				(tab->sprite_arr[k]).y = j;
+				k++;
+			}
+			j++;
+		}
+		i++;
+	}
+		
+		i = 0;
+		printf("\n================================\n");
+		while (i < tab->params->number_of_sprites)
+		{
+			printf("x = %d\n", (tab->sprite_arr[i]).x);	
+			printf("y = %d\n", (tab->sprite_arr[i]).y);					
+			i++;
+		}
+		printf("\n================================\n");
 }
 
 void		init_textures(t_tab *tab)

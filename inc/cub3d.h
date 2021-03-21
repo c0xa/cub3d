@@ -6,7 +6,7 @@
 /*   By: tblink <tblink@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/12 19:55:30 by tblink            #+#    #+#             */
-/*   Updated: 2021/03/20 20:31:42 by tblink           ###   ########.fr       */
+/*   Updated: 2021/03/21 20:16:59 by tblink           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,12 +115,6 @@ typedef struct	s_button { //структура для клавиш
 	int		right;
 }				t_button;
 
-typedef struct	s_point // структура для точки
-{
-	int			x;
-	int			y;
-}				  t_point;
-
 typedef struct	s_tab { // структура для всего
 	void			*mlx_p;
 	void			*win_p;
@@ -144,7 +138,7 @@ int		check_params(char *name_map, char *save_flag, t_params *params);
 int		parse_file(char *map, t_params *params);
 void	init_params(t_params *params);
 void	init_button(t_button *button);
-void	init_sprite (t_sprite *sprite);
+void init_sprite (t_tab *tab);
 void	init_textures(t_tab *tab);
 int		parse_parameter(int fd, t_params *params, int flag, int i);
 int		set_resolution(char **buf, t_params *params);
@@ -169,4 +163,5 @@ void 	motion_left(t_tab *tab);
 void 	motion_w_s(t_tab *tab, int direction);
 void 	motion_a_d(t_tab *tab, int direction);
 int 	draw(t_tab *tab);
+void	sort_sprite(int n, t_tab *tab);
 #endif

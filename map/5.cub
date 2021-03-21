@@ -1,9 +1,9 @@
-R 641 483
+R 1920 1080
 NO textures/WALL16.xpm
 SO textures/WALL16.xpm
 WE textures/WALL16.xpm
 EA textures/WALL16.xpm
-S textures/knight.xpm
+S textures/grass.xpm
 
 F 213,255,128
 C 96,32,32

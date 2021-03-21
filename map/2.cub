@@ -1,12 +1,12 @@
 R 1920 1080
-  NO textures/WALL16.xpm
+        NO textures/WALL16.xpm
           SO textures/WALL75.xpm
           EA textures/WALL85.xpm
 
 
          WE textures/WALL16.xpm
-
-S textures/barrel.xpm
+  
+S textures/grass.xpm
 F 213,255,128
 C 96,32,32
 

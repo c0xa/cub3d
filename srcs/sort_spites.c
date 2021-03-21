@@ -6,7 +6,7 @@
 /*   By: tblink <tblink@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/12 19:55:36 by tblink            #+#    #+#             */
-/*   Updated: 2021/03/20 23:56:07 by tblink           ###   ########.fr       */
+/*   Updated: 2021/03/21 20:34:14 by tblink           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,23 +22,23 @@ int count_distanse(t_sprite *buf1, t_sprite *buf2, t_tab *tab)
 	return (distance1 > distance2);
 }
 
-void	sort_sprite(int n, t_sprite *sprite, t_tab *tab)
+void	sort_sprite(int n, t_tab *tab)
 {
 	t_sprite s;
 	int i;
 	int j;
 
 	i = 0;
-	while (i < n - 1)
+	while (i < n)
 	{
 		j = 0;
-		while (j < n - i)
+		while (j < n - i - 1)
 		{
-			if (count_distanse(&sprite[j + 1], &sprite[j], tab))
+			if (count_distanse(&tab->sprite_arr[j], &tab->sprite_arr[j + 1], tab))
 			{
-				s = sprite[j + 1];
-				sprite[j + 1] = sprite[j];
-				sprite[j] = s;							
+				s = tab->sprite_arr[j + 1];
+				tab->sprite_arr[j + 1] = tab->sprite_arr[j];
+				tab->sprite_arr[j] = s;							
 			}
 			j++;
 		}

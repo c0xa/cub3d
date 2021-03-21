@@ -6,7 +6,7 @@
 /*   By: tblink <tblink@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/12 19:55:36 by tblink            #+#    #+#             */
-/*   Updated: 2021/03/20 20:39:28 by tblink           ###   ########.fr       */
+/*   Updated: 2021/03/21 20:19:15 by tblink           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,8 +87,6 @@ int draw_ceil_floor(t_tab* tab, int x, int y)
 			my_mlx_pixel_put(tab->frame_buf, x, y, tab->params->ceiling);
 			y++;
 		}
-		// while (y <= tab->rayc->draw_end)
-		// 	my_mlx_pixel_put(tab->frame_buf, x, y++, convert_rgb_mlx(147, 97, 133));
 		draw_wall(tab, tab->frame_buf, x);
 		y = tab->rayc->draw_end + 1;
 		while (y < tab->params->height)
@@ -97,7 +95,19 @@ int draw_ceil_floor(t_tab* tab, int x, int y)
 			y++;
 		}
 		x++;
+		sort_sprite(tab->params->number_of_sprites, tab);
 	}
+	int i;
+		
+		i = 0;
+		printf("\n================================\n");
+		while (i < tab->params->number_of_sprites)
+		{
+			printf("x = %d\n", (tab->sprite_arr[i]).x);	
+			printf("y = %d\n", (tab->sprite_arr[i]).y);					
+			i++;
+		}
+		printf("\n================================\n");
 	return (0);
 }
 
@@ -123,6 +133,8 @@ int draw(t_tab *tab)
 
 void draw_and_inital(t_tab *tab)
 {
+	t_sprite sprite_array[tab->params->number_of_sprites];
+	tab->sprite_arr = &sprite_array[0];
 	tab->mlx_p = mlx_init();
 	tab->win_p = mlx_new_window(tab->mlx_p, tab->params->width, tab->params->height, "cub3d");
 	tab->frame_buf->img = mlx_new_image(tab->mlx_p, tab->params->width, tab->params->height);
@@ -130,6 +142,15 @@ void draw_and_inital(t_tab *tab)
 			&(tab->frame_buf->bpp), &(tab->frame_buf->line_len),
 			&(tab->frame_buf->endian));
 	tab->map_size = (tab->params->height * tab->params->width) / 100000;
+	printf("map = %d\n", tab->map_size);
+	printf("map = %d\n", tab->params->width_map * tab->params->height_map);
+	printf("map = %d\n", tab->params->height * tab->params->width);
+	printf("map = %d\n", (tab->params->height * tab->params->width) / (tab->params->width_map * tab->params->height_map));
+	if ((tab->params->height * tab->params->width) / (tab->params->width_map * tab->params->height_map) > 1100)
+	{
+		printf("F\n");
+		tab->map_size = 10;
+	}
 	while ((tab->map_size * tab->params->height_map) >= tab->params->height)
 		tab->map_size--;
 	while ((tab->map_size * tab->params->width_map) >= tab->params->width)
@@ -140,6 +161,7 @@ void draw_and_inital(t_tab *tab)
 	mlx_hook(tab->win_p, 2, 0, check_button_press, tab);
 	mlx_hook(tab->win_p, 3, 0, check_button_release, tab);
 	init_textures(tab);
+	init_sprite(tab);
 	mlx_loop_hook(tab->mlx_p, draw, tab);
 	mlx_loop(tab->mlx_p);
 }
