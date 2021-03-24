@@ -70,5 +70,4 @@ void add_texture(t_tab *tab)
 	add_texture_1(tab);
 	add_texture_2(tab);
 	add_address(tab);
-	printf("add\n");
 }

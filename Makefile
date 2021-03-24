@@ -9,12 +9,14 @@ SRC			= cub3d.c \
 			convert_map.c \
 			check_error_map.c \
 			draw.c \
+			assistant_draw.c \
 			check_button.c \
 			engine.c \
 			init_position.c \
 			texture.c \
 			motion.c \
-			sort_spites.c
+			draw_and_sort_spites.c \
+			save.c 
 
 SOURCES		= $(addprefix $(SRCDIR),$(SRC))
 OBJ			= $(SOURCES:.c=.o)

@@ -6,7 +6,7 @@
 /*   By: tblink <tblink@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/12 19:55:36 by tblink            #+#    #+#             */
-/*   Updated: 2021/03/11 21:44:28 by tblink           ###   ########.fr       */
+/*   Updated: 2021/03/24 18:38:47 by tblink           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,7 @@ int set_color(int flag, char **buf, t_params *params)
 			return (-1);
 	else if (flag == 2 && params->ceiling != -1)
 			return (-1);
-	if (!(rgb = ft_split(buf[1], ',')))
+	if (!(rgb = ft_split(buf[1], ",")))
 		return (-1);
 	if (ft_atoi(rgb[0]) > 255 || ft_atoi(rgb[1]) > 255 || ft_atoi(rgb[2]) > 255
 		|| ft_atoi(rgb[0]) < 0 || ft_atoi(rgb[1]) < 0 || ft_atoi(rgb[2]) < 0)

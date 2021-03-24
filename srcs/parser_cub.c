@@ -6,7 +6,7 @@
 /*   By: tblink <tblink@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/12 19:55:36 by tblink            #+#    #+#             */
-/*   Updated: 2021/03/21 19:23:57 by tblink           ###   ########.fr       */
+/*   Updated: 2021/03/24 18:44:12 by tblink           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,20 +33,25 @@ int check_map(char **buf, t_params *params)
 	return (2);
 }
 
-static char *del_tab_and_sep(char *line)
+static int del_tab_and_sep(char **line)
 {	
 	int i;
 	char *v;
+	char *buf;
 
 	i = 0;
-	while (line[i] == ' ' || line[i]  == '\t' || line[i]  == '\n')
+	buf = *line;
+	while ((buf[i] && (buf[i] == ' ' || buf[i]  == '\t')))
 		i++;
-	if (line[i] >= '0' && line[i] <= '9')
-		v = ft_strdup(line);
+	if (ft_strlen(&(buf[i])) == 0)
+		return (0);
+	if (buf[i] && buf[i] >= '0' && buf[i] <= '9')
+		return (1);
 	else
-		v = ft_strdup(&line[i]);
-	free(line);
-	return (v);
+		v = ft_strdup(&buf[i]);
+	free(buf);
+	*line = v;
+	return (2);
 }
 
 int		parse_parameter(int fd, t_params *params, int flag, int i)
@@ -54,18 +59,14 @@ int		parse_parameter(int fd, t_params *params, int flag, int i)
 	char	*line;
 	char 	**buf;
 
+	
 	if ((get_next_line(fd, &line)) <= 0)
 		return (-1);
-	if (ft_strlen(line) == 0) {
-		free(line);
-		return (0);
-	}
-	line = del_tab_and_sep(line);
-	if ((line[0] >= '0' && line[0] <= '9') || line[0] == ' ')
-		return (convert_map(fd, &line, params));
-	else
+	if ((flag = del_tab_and_sep(&line)) == 1)
+		return (convert_map(fd, &line, params, 0));
+	else if (flag == 2)
 	{
-		if (!(buf = ft_split(line, ' ')))
+		if (!(buf = ft_split(line, " \t")))
 		{
 			free(line);
 			return (-1);
@@ -92,7 +93,9 @@ int		parse_file(char *map, t_params *params)
 	}
 	flag = parse_parameter(fd, params, 1, 0);
 	while (flag == 0)
+	{
 		flag = parse_parameter(fd, params, 1, 0);
+	}
 	if (flag == -1 || (!(params->map)))
 	{
 		perror("Error\nMap is not valid");
@@ -100,6 +103,7 @@ int		parse_file(char *map, t_params *params)
 	}
 	if ((close(fd)) == -1)
 	{
+		
 		perror("Error\nFile is not available ");
 		return (-1);
 	}

@@ -6,7 +6,7 @@
 /*   By: tblink <tblink@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/12 19:55:36 by tblink            #+#    #+#             */
-/*   Updated: 2021/03/19 22:42:41 by tblink           ###   ########.fr       */
+/*   Updated: 2021/03/23 20:34:49 by tblink           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,8 @@ int check_button_press(int but, t_tab *tab)
 		(tab->button)->left = 1;
 	else if (but == 124)
 		(tab->button)->right = 1;
+	else if (but == 49)
+		(tab->button)->space_for_mini_map = 1;
 	return (0);
 }
 
@@ -48,6 +50,8 @@ int check_button_release(int but, t_tab *tab)
 		(tab->button)->left = 0;
 	else if (but == 124)
 		(tab->button)->right = 0;
+	else if (but == 49)
+		(tab->button)->space_for_mini_map = 0;
 	return (0);
 }
 

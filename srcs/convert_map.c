@@ -6,13 +6,13 @@
 /*   By: tblink <tblink@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/12 19:55:36 by tblink            #+#    #+#             */
-/*   Updated: 2021/03/21 19:19:24 by tblink           ###   ########.fr       */
+/*   Updated: 2021/03/23 18:36:57 by tblink           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-static void	move_buf(char **arr1, char **arr2)
+static void	transferring_arrays(char **arr1, char **arr2)
 {
 	char **arr2_p;
 	int i;
@@ -27,27 +27,25 @@ static void	move_buf(char **arr1, char **arr2)
 	free(arr2_p);
 }
 
-static int	convert_map_to_arr(int fd, char **line, t_params *params)
+static int	map_to_array(int fd, char **line, t_params *params, int y)
 {
-	int		y;
 	int		ret;
 	char	**temp;
 	int		i;
 
-	y = 1;
-	i = 0;
 	ret = get_next_line(fd, line);
-	while (ret == 1 || (ret == 0 && **line))
+	while ((ret == 0 && **line) || ret == 1)
 	{
 		temp = params->map;
 		if (!(params->map = (char**)malloc(sizeof(char*) * (y + 2))))
 		{
+			i = 0;
             while (temp[i])
                 free(temp[i++]);
             free(temp);
 			return (-1);
 		}
-		move_buf(params->map, temp);
+		transferring_arrays(params->map, temp);
 		(params->map)[y] = *line;
 		(params->map)[++y] = 0;
 		ret = get_next_line(fd, line);
@@ -82,22 +80,21 @@ static int			check_other_params(t_params *params)
 		return (0);
 }
 
-int			convert_map(int fd, char **line, t_params *params)
+int			convert_map(int fd, char **line, t_params *params, int flag)
 {
 	char	**map;
-	int		ret;
 
-	ret = check_other_params(params);
-	if (!ret)
+	flag = check_other_params(params);
+	if (!flag)
 		return (-1);
 	if (!(map = (char**)malloc(sizeof(char*) * 2)))
 		return (-1);
 	*map = *line;
 	*(map + 1) = 0;
 	params->map = map;
-	if ((ret = convert_map_to_arr(fd, line, params)) != 0)
+	if ((flag = map_to_array(fd, line, params, 1)) != 0)
 		return (-1);
-	ret = check_error_map(params, 0, 0, 0);
+	flag = check_error_map(params, 0, 0, 0);
 	params->number_of_sprites = sum_sprites(params->map, 0, 0, 0);
-	return (ret);
+	return (flag);
 }

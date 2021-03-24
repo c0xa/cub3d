@@ -6,7 +6,7 @@
 /*   By: tblink <tblink@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/12 19:55:36 by tblink            #+#    #+#             */
-/*   Updated: 2021/03/21 20:27:55 by tblink           ###   ########.fr       */
+/*   Updated: 2021/03/23 20:31:07 by tblink           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,24 +47,14 @@ void init_sprite (t_tab *tab)
 		{
 			if (tab->params->map[i][j] == '2')
 			{
-				(tab->sprite_arr[k]).x = i;
-				(tab->sprite_arr[k]).y = j;
+				(tab->sprite_arr[k]).y = i;
+				(tab->sprite_arr[k]).x = j;
 				k++;
 			}
 			j++;
 		}
 		i++;
 	}
-		
-		i = 0;
-		printf("\n================================\n");
-		while (i < tab->params->number_of_sprites)
-		{
-			printf("x = %d\n", (tab->sprite_arr[i]).x);	
-			printf("y = %d\n", (tab->sprite_arr[i]).y);					
-			i++;
-		}
-		printf("\n================================\n");
 }
 
 void		init_textures(t_tab *tab)
@@ -91,4 +81,5 @@ void	init_button(t_button *button)
 	button->d = 0;
 	button->left = 0;
 	button->right = 0;
+	button->space_for_mini_map = 0;
 }

@@ -6,7 +6,7 @@
 /*   By: tblink <tblink@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/12 19:55:30 by tblink            #+#    #+#             */
-/*   Updated: 2021/03/21 20:16:59 by tblink           ###   ########.fr       */
+/*   Updated: 2021/03/24 20:18:13 by tblink           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,6 +111,7 @@ typedef struct	s_button { //структура для клавиш
 	int		a;
 	int		s;
 	int		d;
+	int		space_for_mini_map;
 	int		left;
 	int		right;
 }				t_button;
@@ -138,14 +139,14 @@ int		check_params(char *name_map, char *save_flag, t_params *params);
 int		parse_file(char *map, t_params *params);
 void	init_params(t_params *params);
 void	init_button(t_button *button);
-void init_sprite (t_tab *tab);
+void 	init_sprite (t_tab *tab);
 void	init_textures(t_tab *tab);
 int		parse_parameter(int fd, t_params *params, int flag, int i);
 int		set_resolution(char **buf, t_params *params);
 int		set_texture(int flag, char **buf, t_params *params);
+int		convert_map(int fd, char **line, t_params *params, int flag);
 int		set_color(int flag, char **buf, t_params *params);
-int		convert_map(int fd, char **line, t_params *params);
-void calculate_position_wall(t_tab *tab, t_raycasting *rayc, int height);
+void 	calculate_position_wall(t_tab *tab, t_raycasting *rayc, int height);
 int 	check_error_map(t_params *params, int count_position, int i, int j);
 void 	draw_and_inital(t_tab *tab);
 int 	check_button_release(int but, t_tab *tab);
@@ -162,6 +163,11 @@ void 	motion_right(t_tab *tab);
 void 	motion_left(t_tab *tab);
 void 	motion_w_s(t_tab *tab, int direction);
 void 	motion_a_d(t_tab *tab, int direction);
-int 	draw(t_tab *tab);
-void	sort_sprite(int n, t_tab *tab);
+void 	main_sprite(t_tab *tab, double *ZBuffer);
+void    my_mlx_pixel_put(t_img *frame_buf, int x, int y, int color);
+int 	exit_game(void *arg);
+int		draw_block(int x, int y, t_tab *tab, int color);
+int 	convert_rgb_mlx(int r, int g, int b);
+void	save(t_tab *tab, int x, int y, int bit);
+
 #endif
