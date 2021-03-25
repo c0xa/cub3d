@@ -6,7 +6,7 @@
 /*   By: tblink <tblink@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/12 19:55:36 by tblink            #+#    #+#             */
-/*   Updated: 2021/03/24 18:44:31 by tblink           ###   ########.fr       */
+/*   Updated: 2021/03/25 20:22:22 by tblink           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,19 +58,6 @@ void	free_object(t_params *params)
 	free(params->map);
 }
 
-// static void check(t_params *params)
-// {
-// 	printf("width %d\n", params->width);
-// 	printf("height %d\n", params->height);
-// 	printf("floor %d\n", params->floor);
-// 	printf("ceiling %d\n", params->ceiling);
-// 	printf("number_of_sprites %d\n", params->number_of_sprites);
-// 	printf("north %s\n", params->north);
-// 	printf("south %s\n", params->south);
-// 	printf("west %s\n", params->west);
-// 	printf("east %s\n", params->east);
-// }
-
 static void	calculate_map_width_height(t_params *params)
 {
 	int x;
@@ -102,14 +89,11 @@ static	int	game_start(t_tab *tab, char *map)
 	i = parse_file(map, tab->params);
 	if (i != 1)
 	{
-		//check(tab->params);
 		printf("finish\n");
-		//free_object(tab->params);
-		//init_params(tab->params);
-		//check(tab->params);
+		//while (1) {}
+		clean_tab(tab);
 		return (0);
 	}
-	//check(tab->params);
 	tab->rayc = &rayc;
 	init_button(&button);
 	tab->button = &button;

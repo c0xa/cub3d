@@ -6,7 +6,7 @@
 /*   By: tblink <tblink@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/12 19:55:30 by tblink            #+#    #+#             */
-/*   Updated: 2021/03/24 20:18:13 by tblink           ###   ########.fr       */
+/*   Updated: 2021/03/25 20:13:54 by tblink           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -151,7 +151,7 @@ int 	check_error_map(t_params *params, int count_position, int i, int j);
 void 	draw_and_inital(t_tab *tab);
 int 	check_button_release(int but, t_tab *tab);
 int 	check_button_press(int but, t_tab *tab);
-int		exit_game(void *arg);
+int 	exit_game(void *arg);
 void 	engine_main(t_raycasting *rayc, int x, int width);
 void 	where_is_playes(t_tab *tab, int i, int j);
 void 	add_texture(t_tab *tab);
@@ -169,5 +169,6 @@ int 	exit_game(void *arg);
 int		draw_block(int x, int y, t_tab *tab, int color);
 int 	convert_rgb_mlx(int r, int g, int b);
 void	save(t_tab *tab, int x, int y, int bit);
+void 	clean_tab(t_tab *tab);
 
 #endif

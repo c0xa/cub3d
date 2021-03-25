@@ -6,7 +6,7 @@
 /*   By: tblink <tblink@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/12 19:55:36 by tblink            #+#    #+#             */
-/*   Updated: 2021/03/24 21:04:06 by tblink           ###   ########.fr       */
+/*   Updated: 2021/03/25 19:38:42 by tblink           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ static void draw_wall(t_tab* tab, t_img *frame_buf, int x)
 static void draw_ceil_floor(t_tab* tab, int x, int y)
 {
 	double zbuffer[tab->params->width];
+
 	change_position_and_camera(tab);
 	while (x < (tab->params->width))
 	{
@@ -50,11 +51,9 @@ static void draw_ceil_floor(t_tab* tab, int x, int y)
 		zbuffer[x++] = tab->rayc->perp_wall_dist;
 	}
 	main_sprite(tab, zbuffer);
-	printf("5\n");
 	if (tab->params->save_flag)
 	{
 		save(tab, 0, 0, 0);
-		printf("6\n");
 		exit_game(tab);
 	}
 }
@@ -71,9 +70,7 @@ static void calculate_size_mini_map(t_tab *tab)
 
 static int draw(t_tab *tab)
 {
-	printf("10\n");
 	draw_ceil_floor(tab, 0, 0);
-	printf("####\n");
 	if (tab->button->space_for_mini_map)
 	{
 		for (int i = 0; tab->params->map[i]; i++) 
@@ -101,26 +98,22 @@ void draw_and_inital(t_tab *tab)
 	t_sprite sprite_array[tab->params->number_of_sprites];
 	tab->sprite_arr = &sprite_array[0];
 	tab->mlx_p = mlx_init();
-	printf("1\n");
-	// if (tab->params->save_flag == 0)
-	// {
+	if (tab->params->save_flag == 0)
+	{
 		tab->win_p = mlx_new_window(tab->mlx_p, tab->params->width, tab->params->height, "cub3d");
 		mlx_do_key_autorepeatoff(tab->mlx_p);
 		mlx_hook(tab->win_p, 17, 0, exit_game, tab);
 		mlx_hook(tab->win_p, 2, 0, check_button_press, tab);
 		mlx_hook(tab->win_p, 3, 0, check_button_release, tab);
-	//}
-	printf("2\n");
+	}
 	tab->frame_buf->img = mlx_new_image(tab->mlx_p, tab->params->width, tab->params->height);
 	tab->frame_buf->addr = mlx_get_data_addr(tab->frame_buf->img,
 			&(tab->frame_buf->bpp), &(tab->frame_buf->line_len),
 			&(tab->frame_buf->endian));
-	printf("3\n");
 	calculate_size_mini_map(tab);
 	where_is_playes(tab, 0, 0);
 	init_textures(tab);
 	init_sprite(tab);
-	printf("4\n");
 	mlx_loop_hook(tab->mlx_p, draw, tab);
 	mlx_loop(tab->mlx_p);
 }
