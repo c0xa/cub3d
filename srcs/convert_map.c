@@ -6,16 +6,16 @@
 /*   By: tblink <tblink@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/12 19:55:36 by tblink            #+#    #+#             */
-/*   Updated: 2021/03/23 18:36:57 by tblink           ###   ########.fr       */
+/*   Updated: 2021/03/26 17:25:46 by tblink           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-static void	transferring_arrays(char **arr1, char **arr2)
+static void		transferring_arrays(char **arr1, char **arr2)
 {
-	char **arr2_p;
-	int i;
+	char	**arr2_p;
+	int		i;
 
 	i = 0;
 	arr2_p = arr2;
@@ -27,7 +27,7 @@ static void	transferring_arrays(char **arr1, char **arr2)
 	free(arr2_p);
 }
 
-static int	map_to_array(int fd, char **line, t_params *params, int y)
+static int		map_to_array(int fd, char **line, t_params *params, int y)
 {
 	int		ret;
 	char	**temp;
@@ -40,9 +40,9 @@ static int	map_to_array(int fd, char **line, t_params *params, int y)
 		if (!(params->map = (char**)malloc(sizeof(char*) * (y + 2))))
 		{
 			i = 0;
-            while (temp[i])
-                free(temp[i++]);
-            free(temp);
+			while (temp[i])
+				free(temp[i++]);
+			free(temp);
 			return (-1);
 		}
 		transferring_arrays(params->map, temp);
@@ -54,8 +54,7 @@ static int	map_to_array(int fd, char **line, t_params *params, int y)
 	return (0);
 }
 
-
-static int	sum_sprites(char **map, int count, int x, int y)
+static int		sum_sprites(char **map, int count, int x, int y)
 {
 	while (map[x])
 	{
@@ -68,19 +67,19 @@ static int	sum_sprites(char **map, int count, int x, int y)
 	return (count);
 }
 
-static int			check_other_params(t_params *params)
+static int		check_other_params(t_params *params)
 {
 	if ((params->width != -1) && (params->height != -1)
 			&& (params->north != 0) && (params->south != 0)
 			&& (params->west != 0) && (params->east != 0)
 			&& (params->sprite != 0) && (params->floor != -1)
 			&& (params->ceiling != -1))
-			return (1);
+		return (1);
 	else
 		return (0);
 }
 
-int			convert_map(int fd, char **line, t_params *params, int flag)
+int				convert_map(int fd, char **line, t_params *params, int flag)
 {
 	char	**map;
 

@@ -6,13 +6,13 @@
 /*   By: tblink <tblink@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/12 19:55:36 by tblink            #+#    #+#             */
-/*   Updated: 2021/03/23 20:34:49 by tblink           ###   ########.fr       */
+/*   Updated: 2021/03/26 17:21:32 by tblink           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-int check_button_press(int but, t_tab *tab)
+int		check_button_press(int but, t_tab *tab)
 {
 	if (but == 53)
 	{
@@ -36,7 +36,7 @@ int check_button_press(int but, t_tab *tab)
 	return (0);
 }
 
-int check_button_release(int but, t_tab *tab)
+int		check_button_release(int but, t_tab *tab)
 {
 	if (but == 13)
 		(tab->button)->w = 0;
@@ -55,7 +55,7 @@ int check_button_release(int but, t_tab *tab)
 	return (0);
 }
 
-void change_position_and_camera(t_tab *tab)
+void	change_position_and_camera(t_tab *tab)
 {
 	if (tab->button->w == 1)
 		motion_w_s(tab, 1);

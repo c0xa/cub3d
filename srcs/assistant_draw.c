@@ -6,7 +6,7 @@
 /*   By: tblink <tblink@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/12 19:55:36 by tblink            #+#    #+#             */
-/*   Updated: 2021/03/25 20:31:39 by tblink           ###   ########.fr       */
+/*   Updated: 2021/03/26 17:19:56 by tblink           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,14 @@
 
 void	my_mlx_pixel_put(t_img *frame_buf, int x, int y, int color)
 {
-    char    *dst;
+	char *dst;
 
-    dst = frame_buf->addr + (y * frame_buf->line_len + x * (frame_buf->bpp / 8));
-    *(int*)dst = color;
+	dst = frame_buf->addr + (y * frame_buf->line_len + x
+			* (frame_buf->bpp / 8));
+	*(int*)dst = color;
 }
 
-void clean_tab(t_tab *tab)
+void	clean_tab(t_tab *tab)
 {
 	int i;
 
@@ -43,7 +44,7 @@ void clean_tab(t_tab *tab)
 	}
 }
 
-int exit_game(void *arg)
+int		exit_game(void *arg)
 {
 	t_tab *tab;
 
@@ -54,7 +55,7 @@ int exit_game(void *arg)
 	exit(0);
 }
 
-int draw_block(int x, int y, t_tab *tab, int color)
+int		draw_block(int x, int y, t_tab *tab, int color)
 {
 	int i;
 	int j;
@@ -73,7 +74,7 @@ int draw_block(int x, int y, t_tab *tab, int color)
 	return (0);
 }
 
-int convert_rgb_mlx(int r, int g, int b)
+int		convert_rgb_mlx(int r, int g, int b)
 {
 	return (r << 16 | g << 8 | b);
 }

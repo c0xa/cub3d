@@ -6,7 +6,7 @@
 /*   By: tblink <tblink@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/12 19:55:36 by tblink            #+#    #+#             */
-/*   Updated: 2021/03/12 18:20:16 by tblink           ###   ########.fr       */
+/*   Updated: 2021/03/26 17:22:54 by tblink           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ static int	check_cell(char ceil)
 	return (ceil != '1' && ceil != ' ');
 }
 
-static int edge_check(t_params *params, int i, int j)
+static int	edge_check(t_params *params, int i, int j)
 {
 	if ((i == 0 || !((params->map)[i + 1]))
 			&& check_cell((params->map)[i][j]))
@@ -53,8 +53,7 @@ static int	near_check(t_params *params, int i, int j)
 	return (1);
 }
 
-
-static int check_error_line(t_params *params, int i, int j)
+static int	check_error_line(t_params *params, int i, int j)
 {
 	if ((((params->map)[i][j] < '0' || (params->map)[i][j] > '2')
 		&& (params->map)[i][j] != ' '
@@ -63,10 +62,9 @@ static int check_error_line(t_params *params, int i, int j)
 		|| (!edge_check(params, i, j)) || !near_check(params, i, j))
 		return (0);
 	return (1);
-
 }
 
-int check_error_map(t_params *params, int count_position, int i, int j)
+int			check_error_map(t_params *params, int count_position, int i, int j)
 {
 	while (params->map[i])
 	{

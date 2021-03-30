@@ -6,16 +6,16 @@
 /*   By: tblink <tblink@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/12 19:55:36 by tblink            #+#    #+#             */
-/*   Updated: 2021/03/25 19:31:14 by tblink           ###   ########.fr       */
+/*   Updated: 2021/03/26 20:21:01 by tblink           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-static void bitmap_file_header(unsigned int size, int fd)
+static void		bitmap_file_header(unsigned int size, int fd)
 {
 	unsigned char	buf_bitmap_header[14];
-	int i;
+	int				i;
 
 	i = 0;
 	while (i != 14)
@@ -30,11 +30,10 @@ static void bitmap_file_header(unsigned int size, int fd)
 	write(fd, buf_bitmap_header, 14);
 }
 
-
-static void dib_header(t_tab *tab, int fd)
+static void		dib_header(t_tab *tab, int fd)
 {
-	int i;
-	char buf_bit_map_intfo_header[40];
+	int		i;
+	char	buf_bit_map_intfo_header[40];
 
 	i = 0;
 	while (i != 40)
@@ -42,21 +41,24 @@ static void dib_header(t_tab *tab, int fd)
 	buf_bit_map_intfo_header[0] = (unsigned int)40;
 	buf_bit_map_intfo_header[4] = (unsigned int)(tab->params->width & 255);
 	buf_bit_map_intfo_header[5] = (unsigned int)(tab->params->width >> 8 & 255);
-	buf_bit_map_intfo_header[6] = (unsigned int)(tab->params->width >> 16 & 255);
+	buf_bit_map_intfo_header[6] = (unsigned int)
+		(tab->params->width >> 16 & 255);
 	buf_bit_map_intfo_header[7] = (unsigned int)(tab->params->width >> 24);
 	buf_bit_map_intfo_header[8] = (unsigned int)(tab->params->height & 255);
-	buf_bit_map_intfo_header[9] = (unsigned int)(tab->params->height >> 8 & 255);
-	buf_bit_map_intfo_header[10] = (unsigned int)(tab->params->height >> 16 & 255);
+	buf_bit_map_intfo_header[9] = (unsigned int)
+		(tab->params->height >> 8 & 255);
+	buf_bit_map_intfo_header[10] = (unsigned int)
+		(tab->params->height >> 16 & 255);
 	buf_bit_map_intfo_header[11] = (unsigned int)(tab->params->height >> 24);
 	buf_bit_map_intfo_header[12] = 1;
-	buf_bit_map_intfo_header[14] = (unsigned int)tab->frame_buf->bpp; //32
+	buf_bit_map_intfo_header[14] = (unsigned int)tab->frame_buf->bpp;
 	write(fd, buf_bit_map_intfo_header, 40);
 }
 
-void	save(t_tab *tab, int x, int y, int bit)
+void			save(t_tab *tab, int x, int y, int bit)
 {
-	unsigned int size;
-	int fd;
+	unsigned int	size;
+	int				fd;
 
 	if ((fd = open("save.bmp", O_CREAT | O_WRONLY | O_TRUNC, S_IRWXU)) == -1)
 	{

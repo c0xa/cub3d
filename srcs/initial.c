@@ -6,13 +6,13 @@
 /*   By: tblink <tblink@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/12 19:55:36 by tblink            #+#    #+#             */
-/*   Updated: 2021/03/23 20:31:07 by tblink           ###   ########.fr       */
+/*   Updated: 2021/03/26 20:13:42 by tblink           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void init_params(t_params *params)
+void	init_params(t_params *params)
 {
 	params->save_flag = 0;
 	params->width = -1;
@@ -30,8 +30,7 @@ void init_params(t_params *params)
 	params->width_map = 0;
 }
 
-
-void init_sprite (t_tab *tab)
+void	init_sprite(t_tab *tab)
 {
 	int i;
 	int j;
@@ -40,7 +39,7 @@ void init_sprite (t_tab *tab)
 	i = 0;
 	j = 0;
 	k = 0;
-    while (tab->params->map[i])
+	while (tab->params->map[i])
 	{
 		j = 0;
 		while (tab->params->map[i][j])
@@ -57,7 +56,7 @@ void init_sprite (t_tab *tab)
 	}
 }
 
-void		init_textures(t_tab *tab)
+void	init_textures(t_tab *tab)
 {
 	static t_tex	n_tex;
 	static t_tex	w_tex;

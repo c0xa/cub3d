@@ -1,19 +1,18 @@
-
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   draw.c                                             :+:      :+:    :+:   */
+/*   init_position.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tblink <tblink@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/12 19:55:36 by tblink            #+#    #+#             */
-/*   Updated: 2021/03/18 19:54:06 by tblink           ###   ########.fr       */
+/*   Updated: 2021/03/26 20:12:19 by tblink           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-static void	init_tab(t_tab *tab, char dir)
+static void		init_tab(t_tab *tab, char dir)
 {
 	tab->rayc->dir_x = 0;
 	tab->rayc->dir_y = 0;
@@ -41,7 +40,7 @@ static void	init_tab(t_tab *tab, char dir)
 	}
 }
 
-void where_is_playes(t_tab *tab, int i, int j)
+void			where_is_playes(t_tab *tab, int i, int j)
 {
 	t_params *params;
 

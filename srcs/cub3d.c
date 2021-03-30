@@ -6,13 +6,31 @@
 /*   By: tblink <tblink@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/12 19:55:36 by tblink            #+#    #+#             */
-/*   Updated: 2021/03/25 20:22:22 by tblink           ###   ########.fr       */
+/*   Updated: 2021/03/30 21:40:51 by tblink           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-int		check_params(char *name_map, char *save_flag, t_params *params)
+int				count_sep(char *str)
+{
+	int i;
+	int sum;
+
+	i = 0;
+	sum = 0;
+	while (str[i])
+	{
+		if (str[i] == ',')
+			sum++;
+		i++;
+	}
+	if (sum != 2)
+		return (-1);
+	return (0);
+}
+
+int				check_params(char *name_map, char *save_flag, t_params *params)
 {
 	char	*end_line;
 	size_t	len;
@@ -36,39 +54,17 @@ int		check_params(char *name_map, char *save_flag, t_params *params)
 	return (0);
 }
 
-void	free_object(t_params *params)
+static void		calculate_map_width_height(t_params *params)
 {
-	int i;
-
-	i = 0;
-	if (params->east)
-		free(params->east);
-	if (params->south)
-		free(params->south);
-	if (params->west)
-		free(params->west);
-	if (params->east)
-		free(params->east);
-	if (params->sprite)
-		free(params->sprite);
-	if (params->map == NULL)
-		return;
-	while (params->map[i])
-		free(params->map[i++]);
-	free(params->map);
-}
-
-static void	calculate_map_width_height(t_params *params)
-{
-	int x;
-	int y;
-	int y_max;
+	size_t x;
+	size_t y;
+	size_t y_max;
 
 	x = 0;
-	y = 0;
 	y_max = 0;
 	while (params->map[x])
 	{
+		y = 0;
 		while (params->map[x][y])
 			y++;
 		if (y_max < y)
@@ -79,18 +75,16 @@ static void	calculate_map_width_height(t_params *params)
 	params->width_map = y_max;
 }
 
-static	int	game_start(t_tab *tab, char *map)
+static int		game_start(t_tab *tab, char *map)
 {
 	t_button		button;
 	t_raycasting	rayc;
 	t_img			frame_buf;
-	int i;
+	int				i;
 
 	i = parse_file(map, tab->params);
 	if (i != 1)
 	{
-		printf("finish\n");
-		//while (1) {}
 		clean_tab(tab);
 		return (0);
 	}
@@ -103,7 +97,7 @@ static	int	game_start(t_tab *tab, char *map)
 	return (0);
 }
 
-int	main(int argc, char **argv)
+int				main(int argc, char **argv)
 {
 	t_tab		tab;
 	t_params	params;

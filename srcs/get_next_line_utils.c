@@ -6,13 +6,13 @@
 /*   By: tblink <tblink@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/12 19:55:36 by tblink            #+#    #+#             */
-/*   Updated: 2021/03/05 17:59:34 by tblink           ###   ########.fr       */
+/*   Updated: 2021/03/26 20:11:15 by tblink           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-static int			ft_strchr_strlen(char *str, int flag)
+static int	ft_strchr_strlen(char *str, int flag)
 {
 	int n;
 
@@ -36,7 +36,7 @@ static int			ft_strchr_strlen(char *str, int flag)
 	return (n);
 }
 
-static int			freestr(char **dest, char *src)
+static int	freestr(char **dest, char *src)
 {
 	char	*tmp;
 
@@ -46,7 +46,7 @@ static int			freestr(char **dest, char *src)
 	return (1);
 }
 
-static char		*fstrjoin(char *s1, char *s2, int len2)
+static char	*fstrjoin(char *s1, char *s2, int len2)
 {
 	size_t		len1;
 	char		*buf;
@@ -72,7 +72,7 @@ static char		*fstrjoin(char *s1, char *s2, int len2)
 	return (buf);
 }
 
-static char		*stream(char **line, char *buf)
+static char	*stream(char **line, char *buf)
 {
 	char		*s;
 	int			len;

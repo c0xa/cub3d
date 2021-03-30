@@ -15,7 +15,7 @@ SRC			= cub3d.c \
 			init_position.c \
 			texture.c \
 			motion.c \
-			draw_and_sort_spites.c \
+			draw_and_sort_sprites.c \
 			save.c 
 
 SOURCES		= $(addprefix $(SRCDIR),$(SRC))
@@ -26,14 +26,17 @@ CFLAGS		= -Iinc/ -Wall -Wextra -Werror
 LIBFT_FLAGS	= -L libft/ -lft
 
 .c.o:
-			$(CC) $(CFLAGS) -c $< -o $(<:.c=.o)
+			$(CC) $(CFLAGS) -g -c $< -o $(<:.c=.o)
 
 $(NAME):	$(OBJ)
 			make bonus -C libft/
-			$(CC) -o $(NAME) $(LIBFT_FLAGS) $(MLXFLAGS) $(OBJ)
+			$(CC) -g -o $(NAME) $(LIBFT_FLAGS) $(MLXFLAGS) $(OBJ)
 
 all:		$(NAME)
 
+bonus:		$(OBJ)
+			make bonus -C libft/
+			$(CC) -g -o $(NAME) $(LIBFT_FLAGS) $(MLXFLAGS) $(OBJ)
 
 clean:
 			rm -rf $(OBJ)
