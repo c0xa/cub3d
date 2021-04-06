@@ -6,7 +6,7 @@
 /*   By: tblink <tblink@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/12 19:55:36 by tblink            #+#    #+#             */
-/*   Updated: 2021/03/30 21:40:33 by tblink           ###   ########.fr       */
+/*   Updated: 2021/04/02 18:27:49 by tblink           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,8 +35,8 @@ static int		ch(const char *string)
 
 int				set_resolution(char **buf, t_params *params)
 {
-	size_t height;
-	size_t width;
+	int height;
+	int width;
 
 	if (!buf[1] || !buf[2] || buf[3])
 		return (-1);
